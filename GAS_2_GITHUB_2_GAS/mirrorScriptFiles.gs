@@ -1,3 +1,8 @@
+//Authorization uses EzyOauth2
+//http://ramblings.mcpher.com/Home/excelquirks/oauthtoo/ezyoauth2
+
+
+
 function mirrorScriptFiles(scriptSource,scriptDestination,keepFileNames) {
   var AUTH = JSON.parse(AUTH_PACKAGE)
   OAuth2.EzyOauth2(AUTH);
@@ -5,7 +10,7 @@ function mirrorScriptFiles(scriptSource,scriptDestination,keepFileNames) {
   
   if (!keepFileNames) keepFileNames = []; //array of filenames NOT to update, i.e. ["configuration.gs"];
   
-
+  
   //get file data
   var sourceFile = Drive.Files.get(scriptSource);
   var destFile = Drive.Files.get(scriptDestination);
@@ -46,15 +51,15 @@ function mirrorScriptFiles(scriptSource,scriptDestination,keepFileNames) {
   //CREATE UPDATE JSON
   //we need to keep the ID's in the destination file, so we only want to update source.
   //this part of the code updates name and type too, which does not matter for existing files but is needed if a file is added
-   for (var key in workingObject.source) {
+  for (var key in workingObject.source) {
     
     if (keepFileNames.indexOf(key)==-1 || !workingObject.dest[key]) { //if the file does not exist AND is not in keepFileNames, update the file
-      if (!workingObject.dest[key]) workingObject.dest[key] = {};
+      if (!workingObject.dest[key]) workingObject.dest[key] = {}; //create new file
       workingObject.dest[key].name = workingObject.source[key].name;
       workingObject.dest[key].source = workingObject.source[key].source;
       workingObject.dest[key].type = workingObject.source[key].type;
     }
-     
+    
   }
   
   //delete files (not sure if I want to)
@@ -66,10 +71,7 @@ function mirrorScriptFiles(scriptSource,scriptDestination,keepFileNames) {
   }
   
   
-  
-  //WORKS!
-  var url = "https://www.googleapis.com/upload/drive/v2/files/"+scriptDestination //convert=true"
-  
+  var url = "https://www.googleapis.com/upload/drive/v2/files/"+scriptDestination
   
   var options = { 
     contentType: "application/vnd.google-apps.script+json",
