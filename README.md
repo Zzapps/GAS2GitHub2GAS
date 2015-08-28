@@ -15,3 +15,8 @@ EzyOauth2 library, Bruce McPherson. This is to access the Drive API to import sc
 MSaYlTXSVk7FAqpHNCcqBv6i_d-phDA33
 
 http://ramblings.mcpher.com/Home/excelquirks/oauthtoo/ezyoauth2
+
+## Notes
+
+The 'keepFileNames' argument is an array with filenames to skip when updating.
+I.e. a configuration file you don't want to update.
