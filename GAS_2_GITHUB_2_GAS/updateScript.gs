@@ -1,4 +1,4 @@
-function updateScriptFile(scriptDestination, scriptName, repo, companyName, keepFileNames, GITHUB_API) {
+function updateScriptFile(scriptDestination, scriptName, repo, company, keepFileNames, GITHUB_API) {
   var AUTH = JSON.parse(AUTH_PACKAGE)
   OAuth2.EzyOauth2(AUTH);
   //get github_file
@@ -11,7 +11,7 @@ function updateScriptFile(scriptDestination, scriptName, repo, companyName, keep
   }
  
   
-  var command = "repos/"+companyName+"/"+repo+"/contents/"
+  var command = "repos/"+company+"/"+repo+"/contents/"
 
   //get data from github  
   var scriptFiles = GitHub("get",command+scriptName,"",GITHUB_API);
@@ -22,7 +22,7 @@ function updateScriptFile(scriptDestination, scriptName, repo, companyName, keep
     var file = scriptFiles[i];
     
     
-    var c = "repos/Zzapps/"+repo+"/commits?path="+file.path
+    var c = "repos/"+company+"/"+repo+"/commits?path="+file.path
     var commits = GitHub("get",c,"",GITHUB_API)
     var data = file._links.git.replace("https://api.github.com/","");
     
