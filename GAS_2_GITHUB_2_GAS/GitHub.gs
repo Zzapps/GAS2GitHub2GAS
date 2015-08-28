@@ -1,6 +1,9 @@
 var GITHUB_API = ""
 
-function updateToGitHub(scriptId, repo, GITHUB_API) {
+//i.e.:
+//https://github.com/{{company}}/{{repo}}/
+//https://github.com/Zzapps/GAS2GitHub2GAS/
+function updateToGitHub(scriptId, repo, company, GITHUB_API) {
   //get file data
   var file = Drive.Files.get(scriptId);
   
@@ -23,7 +26,7 @@ function updateToGitHub(scriptId, repo, GITHUB_API) {
   
   //GITHUB PART
   //get current github github_files from repo
-  var command = "repos/Zzapps/"+repo+"/contents/";
+  var command = "repos/"+company+"/"+repo+"/contents/";
   
   //successfully gets array of github_files
   var q = GitHub("get",command,"",GITHUB_API);
@@ -63,7 +66,7 @@ function updateToGitHub(scriptId, repo, GITHUB_API) {
     //the folder does not exist in GitHub
     if (!github_files[path_unencoded] || !github_files[path_unencoded][file.name+ext]) {
       //create a new file
-      var url = "repos/Zzapps/"+repo+"/contents/"+path+file.name+ext;
+      var url = "repos/"+company+"/"+repo+"/contents/"+path+file.name+ext;
       var res = GitHub("put",url,JSON.stringify(toGitHub),GITHUB_API);
     } else {
       //file in this folder already exists in github, we only have to add the 'sha'  
