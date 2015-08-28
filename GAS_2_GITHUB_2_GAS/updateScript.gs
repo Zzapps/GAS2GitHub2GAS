@@ -4,8 +4,7 @@ function updateScriptFile(scriptDestination, scriptName, repo, company, keepFile
   //get github_file
   if (!keepFileNames) keepFileNames = []; //array of filenames NOT to update, i.e. ["configuration.gs"];
 
-  //successfully gets array of files
-  var q = GitHub("get",command,"",GITHUB_API);
+
   var sourceFilejson_data = {
     files:[]
   }
